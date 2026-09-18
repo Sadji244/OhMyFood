@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "animation";
 
 body {
     margin: 0;
@@ -246,6 +247,13 @@ header {
     
     i {
         font-size: 20px;
+        cursor: pointer;
+
+        &:checked {
+            transition-duration: 10ms;
+            color: red;
+
+        }
     }
 }
 
@@ -254,17 +262,41 @@ header {
 
     background: linear-gradient(
         180deg,
-        $color-secondary,
-        $color-primary
+        $color-primary,
+        $color-secondary
     );
 
-    -webkit-background-clip: text;
     background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
 
+.heart {
+    input {
+        display: none;
+    }
 
+    label {
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .heart-full {
+        display: none;
+        color: $color-primary;
+    }
+
+    input:checked + label {
+        .heart-empty {
+            display: none;
+        }
+
+        .heart-full {
+            display: inline-block;
+        }
+    }
+}
 
 
 /* -------------------- FOOTER -------------------- */

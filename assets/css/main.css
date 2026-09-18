@@ -1,3 +1,15 @@
+/* -------------------- ANIMATIONS -------------------- */
+/* ---------- BUTTON ---------- */
+button {
+  transition: opacity 300ms ease, box-shadow 300ms ease;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.85;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+  transform: translateY(2px);
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -201,15 +213,38 @@ header .logo {
 }
 .bottom-card i {
   font-size: 20px;
+  cursor: pointer;
+}
+.bottom-card i:checked {
+  transition-duration: 10ms;
+  color: red;
 }
 
 .heart-full {
   font-size: 20px;
-  background: linear-gradient(180deg, #FF79DA, #9356DC);
-  -webkit-background-clip: text;
+  background: linear-gradient(180deg, #9356DC, #FF79DA);
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+.heart input {
+  display: none;
+}
+.heart label {
+  cursor: pointer;
+  font-size: 20px;
+}
+.heart .heart-full {
+  display: none;
+  color: #9356DC;
+}
+.heart input:checked + label .heart-empty {
+  display: none;
+}
+.heart input:checked + label .heart-full {
+  display: inline-block;
 }
 
 /* -------------------- FOOTER -------------------- */

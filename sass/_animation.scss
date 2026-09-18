@@ -1,0 +1,14 @@
+/* -------------------- ANIMATIONS -------------------- */
+
+/* ---------- BUTTON ---------- */
+
+button {
+    transition: opacity 300ms ease, box-shadow 300ms ease;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.85;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+        transform: translateY(2px);
+    }
+}
