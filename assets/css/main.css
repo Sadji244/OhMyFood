@@ -171,6 +171,11 @@ header .logo {
   gap: 30px;
 }
 
+.resto-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .resto-card {
   width: 100%;
   border-radius: 15px;
