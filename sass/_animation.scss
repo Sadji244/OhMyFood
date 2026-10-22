@@ -1,14 +1,78 @@
+@use "variables" as *;
+
 /* -------------------- ANIMATIONS -------------------- */
 
 /* ---------- BUTTON ---------- */
 
 button {
-    transition: opacity 300ms ease, box-shadow 300ms ease;
-    cursor: pointer;
+  transition:
+    opacity 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
 
-    &:hover {
-        opacity: 0.85;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
-        transform: translateY(2px);
-    }
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.65;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+    transform: scale(1.03);
+  }
+}
+
+/* ---------- CHOIX DU PLAT ---------- */
+
+.toggle-price {
+  display: none;
+}
+
+.choisir {
+  display: flex;
+  flex: 0 0 0%;
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background: $color-tertiary;
+  border-radius: 0 15px 15px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-price:checked ~ .choisir {
+  visibility: visible;
+  animation: slide 500ms ease forwards;
+}
+
+.toggle-price:not(:checked) ~ .choisir {
+  animation: deslide 500ms ease forwards;
+}
+
+/* ---------- ICÔNE ---------- */
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+  color: white;
+}
+
+/* ---------- KEYFRAMES ---------- */
+@keyframes slide {
+  from {
+    flex-basis: 0%;
+  }
+
+  to {
+    flex-basis: 20%;
+  }
+}
+
+@keyframes deslide {
+  from {
+    flex-basis: 20%;
+    visibility: visible;
+  }
+
+  to {
+    flex-basis: 0%;
+    visibility: hidden;
+  }
 }

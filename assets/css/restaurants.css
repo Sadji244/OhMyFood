@@ -1,15 +1,68 @@
+@charset "UTF-8";
 /* -------------------- ANIMATIONS -------------------- */
 /* ---------- BUTTON ---------- */
 button {
-  transition: opacity 300ms ease, box-shadow 300ms ease;
+  transition: opacity 300ms ease, box-shadow 300ms ease, transform 300ms ease;
   cursor: pointer;
 }
 button:hover {
-  opacity: 0.85;
+  opacity: 0.65;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
-  transform: translateY(2px);
+  transform: scale(1.03);
 }
 
+/* ---------- CHOIX DU PLAT ---------- */
+.toggle-price {
+  display: none;
+}
+
+.choisir {
+  display: flex;
+  flex: 0 0 0%;
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background: #99e2d0;
+  border-radius: 0 15px 15px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-price:checked ~ .choisir {
+  visibility: visible;
+  animation: slide 500ms ease forwards;
+}
+
+.toggle-price:not(:checked) ~ .choisir {
+  animation: deslide 500ms ease forwards;
+}
+
+/* ---------- ICÔNE ---------- */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+  color: white;
+}
+
+/* ---------- KEYFRAMES ---------- */
+@keyframes slide {
+  from {
+    flex-basis: 0%;
+  }
+  to {
+    flex-basis: 20%;
+  }
+}
+@keyframes deslide {
+  from {
+    flex-basis: 20%;
+    visibility: visible;
+  }
+  to {
+    flex-basis: 0%;
+    visibility: hidden;
+  }
+}
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -45,7 +98,7 @@ header .back-arrow {
 }
 
 .menus {
-  background: #F6F6F6;
+  background: #f6f6f6;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -73,7 +126,7 @@ header .back-arrow {
 }
 .heart .heart-full {
   display: none;
-  background: linear-gradient(180deg, #9356DC, #FF79DA);
+  background: linear-gradient(180deg, #9356dc, #ff79da);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -92,7 +145,7 @@ header .back-arrow {
 .part-menu h2 {
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .menu-title::after {
@@ -100,7 +153,7 @@ header .back-arrow {
   display: block;
   width: 40px;
   height: 3px;
-  background: #99E2D0;
+  background: #99e2d0;
   margin-top: 5px;
 }
 
@@ -112,32 +165,45 @@ header .back-arrow {
 
 .cards-assiette {
   display: flex;
-  justify-content: space-between;
-  background: #FFFFFF;
-  padding: 15px;
+  align-items: stretch;
+  background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: transform 0.3s ease;
+  overflow: hidden;
 }
 
+.menu-name {
+  padding: 15px;
+  flex: 1;
+  min-width: 0;
+}
 .menu-name h3 {
   margin: 0 0 5px 0;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .menu-name p {
   margin: 0;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .price {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 .price p {
   margin: 0;
+  padding: 15px;
   font-weight: 700;
 }
 
@@ -150,10 +216,10 @@ header .back-arrow {
 .command-btn {
   border: none;
   border-radius: 35px;
-  padding: 20px 30px;
-  font-size: 16px;
-  color: #FFFFFF;
-  background: linear-gradient(to bottom, #FF79DA, #9356DC);
+  padding: 15px 35px;
+  font-size: 14px;
+  color: #ffffff;
+  background: linear-gradient(to bottom, #ff79da, #9356dc);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
