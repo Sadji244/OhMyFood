@@ -59,38 +59,6 @@ header {
   }
 }
 
-.heart {
-  input {
-    display: none;
-  }
-
-  label {
-    cursor: pointer;
-    font-size: 20px;
-  }
-
-  .heart-full {
-    display: none;
-
-    background: linear-gradient(180deg, $color-primary, $color-secondary);
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  input:checked + label {
-    .heart-empty {
-      display: none;
-    }
-
-    .heart-full {
-      display: inline-block;
-    }
-  }
-}
-
 .part-menu {
   padding: 20px 15px;
 
@@ -127,18 +95,39 @@ header {
   overflow: hidden;
 }
 
+/* --------------------------- ANIM D'ENTREE --------------------------- */
+
+.menu-appear {
+  opacity: 0;
+  animation: menu-appear 0.8s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.5s;
+}
+
+.delay-3 {
+  animation-delay: 0.8s;
+}
+
+/* ---------------------------  --------------------------- */
+
 .menu-name {
   padding: 15px;
   flex: 1;
-  min-width: 0;
+  min-width: 0; // Permet au bloc de rétrécir si le panneau de sélection apparaît
 
   h3 {
     margin: 0 0 5px 0;
     font-weight: $font-weight-bold;
     font-size: $font-size-medium;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; // Empêche de passer à la ligne
+    overflow: hidden; // Cache le texte qui dépasse
+    text-overflow: ellipsis; // ... à la fin du texte qd il est trop long
   }
 
   p {

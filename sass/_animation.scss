@@ -2,7 +2,32 @@
 
 /* -------------------- ANIMATIONS -------------------- */
 
-/* ---------- BUTTON ---------- */
+/* ------------------------------ LOADER main ------------------------------ */
+
+@keyframes dot-bounce {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes loader-disappear {
+  0%,
+  85% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ------------------------------ BUTTON ------------------------------ */
 
 button {
   transition:
@@ -19,7 +44,68 @@ button {
   }
 }
 
-/* ---------- CHOIX DU PLAT ---------- */
+/* ------------------------------ HEART ------------------------------ */
+
+.heart {
+  input {
+    display: none;
+  }
+
+  label {
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    font-size: 20px;
+
+    i {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 20px;
+    }
+  }
+
+  .heart-empty {
+    color: black;
+    transition: opacity 0.4s ease;
+  }
+
+  .heart-full {
+    background: linear-gradient(180deg, $color-primary, $color-secondary);
+
+    background-clip: text; //uniquement l'icône
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    clip-path: inset(100% 0 0 0); //masque le cœur rempli
+    transition: clip-path 0.4s ease; //rend le remplissage progressif.
+  }
+
+  // Survol uniquement sur ordinateur
+  @media (hover: hover) and (pointer: fine) {
+    input:not(:checked) + label:hover .heart-full {
+      clip-path: inset(0 0 0 0); //affiche le cœur rempli
+    }
+
+    input:not(:checked) + label:hover .heart-empty {
+      opacity: 0;
+    }
+  }
+
+  // Cœur coché : rempli
+  input:checked + label .heart-full {
+    clip-path: inset(0 0 0 0); //affiche le cœur rempli
+  }
+
+  input:checked + label .heart-empty {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------ SLIDE - DESLIDE restaurant ------------------------------ */
 
 .toggle-price {
   display: none;
@@ -38,12 +124,15 @@ button {
   justify-content: center;
 }
 
+/* Au survol ou lorsque le plat est sélectionné */
+.cards-assiette:hover .choisir,
 .toggle-price:checked ~ .choisir {
   visibility: visible;
   animation: slide 500ms ease forwards;
 }
 
-.toggle-price:not(:checked) ~ .choisir {
+/* Lorsque le curseur quitte le plat et que la case n'est pas cochée */
+.cards-assiette:not(:hover) .toggle-price:not(:checked) ~ .choisir {
   animation: deslide 500ms ease forwards;
 }
 
@@ -54,7 +143,8 @@ button {
   color: white;
 }
 
-/* ---------- KEYFRAMES ---------- */
+/* ---------- ---------- */
+
 @keyframes slide {
   from {
     flex-basis: 0%;
@@ -74,5 +164,19 @@ button {
   to {
     flex-basis: 0%;
     visibility: hidden;
+  }
+}
+
+/* ------------------------------ ANIM D'ENTREE ------------------------------ */
+
+@keyframes menu-appear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

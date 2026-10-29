@@ -1,6 +1,25 @@
 @charset "UTF-8";
 /* -------------------- ANIMATIONS -------------------- */
-/* ---------- BUTTON ---------- */
+/* ------------------------------ LOADER main ------------------------------ */
+@keyframes dot-bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+@keyframes loader-disappear {
+  0%, 85% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+/* ------------------------------ BUTTON ------------------------------ */
 button {
   transition: opacity 300ms ease, box-shadow 300ms ease, transform 300ms ease;
   cursor: pointer;
@@ -11,7 +30,53 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* ---------- CHOIX DU PLAT ---------- */
+/* ------------------------------ HEART ------------------------------ */
+.heart input {
+  display: none;
+}
+.heart label {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.heart label i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 20px;
+}
+.heart .heart-empty {
+  color: black;
+  transition: opacity 0.4s ease;
+}
+.heart .heart-full {
+  background: linear-gradient(180deg, #9356dc, #ff79da);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.4s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .heart input:not(:checked) + label:hover .heart-full {
+    clip-path: inset(0 0 0 0);
+  }
+  .heart input:not(:checked) + label:hover .heart-empty {
+    opacity: 0;
+  }
+}
+.heart input:checked + label .heart-full {
+  clip-path: inset(0 0 0 0);
+}
+.heart input:checked + label .heart-empty {
+  opacity: 0;
+}
+
+/* ------------------------------ SLIDE - DESLIDE restaurant ------------------------------ */
 .toggle-price {
   display: none;
 }
@@ -29,12 +94,15 @@ button:hover {
   justify-content: center;
 }
 
+/* Au survol ou lorsque le plat est sélectionné */
+.cards-assiette:hover .choisir,
 .toggle-price:checked ~ .choisir {
   visibility: visible;
   animation: slide 500ms ease forwards;
 }
 
-.toggle-price:not(:checked) ~ .choisir {
+/* Lorsque le curseur quitte le plat et que la case n'est pas cochée */
+.cards-assiette:not(:hover) .toggle-price:not(:checked) ~ .choisir {
   animation: deslide 500ms ease forwards;
 }
 
@@ -44,7 +112,7 @@ button:hover {
   color: white;
 }
 
-/* ---------- KEYFRAMES ---------- */
+/* ---------- ---------- */
 @keyframes slide {
   from {
     flex-basis: 0%;
@@ -63,6 +131,59 @@ button:hover {
     visibility: hidden;
   }
 }
+/* ------------------------------ ANIM D'ENTREE ------------------------------ */
+@keyframes menu-appear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* -------------------- LOADER -------------------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  background-color: white;
+  animation: loader-disappear 3s forwards;
+}
+
+.loader-logo {
+  font-size: 35px;
+  font-weight: 700;
+  font-family: "Shrikhand", cursive;
+  margin: 0;
+}
+
+.loader-dots {
+  display: flex;
+  gap: 10px;
+}
+.loader-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #9356dc;
+  animation: dot-bounce 0.6s infinite alternate;
+}
+.loader-dots span:nth-child(2) {
+  background-color: #ff79da;
+  animation-delay: 0.2s;
+}
+.loader-dots span:nth-child(3) {
+  background-color: #99e2d0;
+  animation-delay: 0.4s;
+}
+
+/* -------------------- PAGE -------------------- */
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -273,33 +394,6 @@ header .logo {
 .bottom-card i {
   font-size: 20px;
   cursor: pointer;
-}
-
-.heart-full {
-  font-size: 20px;
-  background: linear-gradient(180deg, #9356dc, #ff79da);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-.heart input {
-  display: none;
-}
-.heart label {
-  cursor: pointer;
-  font-size: 20px;
-}
-.heart .heart-full {
-  display: none;
-  color: #9356dc;
-}
-.heart input:checked + label .heart-empty {
-  display: none;
-}
-.heart input:checked + label .heart-full {
-  display: inline-block;
 }
 
 /* -------------------- FOOTER -------------------- */
