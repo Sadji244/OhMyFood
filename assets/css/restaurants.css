@@ -94,18 +94,29 @@ button:hover {
   justify-content: center;
 }
 
-/* Au survol ou lorsque le plat est sélectionné */
-.cards-assiette:hover .choisir,
+/* Sur ordinateur : ouverture au survol */
+@media (hover: hover) and (pointer: fine) {
+  .cards-assiette:hover .choisir {
+    visibility: visible;
+    animation: slide 500ms ease forwards;
+  }
+  /* Fermeture lorsque la souris quitte la carte */
+  .cards-assiette:not(:hover) .toggle-price:not(:checked) ~ .choisir {
+    animation: deslide 500ms ease forwards;
+  }
+}
+/* Lorsque le plat est sélectionné */
 .toggle-price:checked ~ .choisir {
   visibility: visible;
   animation: slide 500ms ease forwards;
 }
 
-/* Lorsque le curseur quitte le plat et que la case n'est pas cochée */
-.cards-assiette:not(:hover) .toggle-price:not(:checked) ~ .choisir {
-  animation: deslide 500ms ease forwards;
+/* Sur mobile : fermeture lorsque le plat est décoché */
+@media (hover: none) and (pointer: coarse) {
+  .toggle-price:not(:checked) ~ .choisir {
+    animation: deslide 500ms ease forwards;
+  }
 }
-
 /* ---------- ICÔNE ---------- */
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1;
